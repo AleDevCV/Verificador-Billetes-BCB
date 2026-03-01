@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Análisis de Lote"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:textColor="#000000"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/tablaResultados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:background="#000000"
+                android:divider="?android:attr/dividerHorizontal"
+                android:showDividers="middle">
+
+                <TableRow
+                    android:background="#FFD966"
+                    android:padding="2dp">
+                    <TextView android:text="SERIE B" android:textStyle="bold" android:padding="8dp" android:gravity="center" android:textColor="#000000"/>
+                    <TextView android:text="Bs. 10" android:textStyle="bold" android:padding="8dp" android:gravity="center" android:textColor="#000000"/>
+                    <TextView android:text="Bs. 20" android:textStyle="bold" android:padding="8dp" android:gravity="center" android:textColor="#000000"/>
+                    <TextView android:text="Bs. 50" android:textStyle="bold" android:padding="8dp" android:gravity="center" android:textColor="#000000"/>
+                </TableRow>
+
+            </TableLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+</LinearLayout>
