@@ -13,7 +13,7 @@ A raíz del siniestro aéreo ocurrido en El Alto (marzo 2026), el Banco Central 
 
 ## 📥 Descarga e Instalación
 Puedes descargar la aplicación compilada, segura y lista para usar en tu dispositivo Android desde la sección de lanzamientos:
-👉 **[Descargar Verificador BCB (APK)](https://github.com/AleDevCV/Verificador-Billetes-BCB/releases/download/v1.0.0/Verificador_BCB_v1.0.apk)**
+👉 **[Descargar Verificador BCB (APK)](https://github.com/AleDevCV/Verificador-Billetes-BCB/releases/download/v1.0.0/Verificador_Billete_BCB-v1.0.apk)**
 
 ## 👨‍💻 Desarrollador
 AleCV
