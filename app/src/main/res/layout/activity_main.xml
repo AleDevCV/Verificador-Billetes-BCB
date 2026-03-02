@@ -16,7 +16,7 @@
         android:textSize="26sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:textColor="#000000"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_marginBottom="24dp"/>
 
     <TextView
@@ -25,7 +25,7 @@
         android:text="Presione aquí para escanear automáticamente con la CÁMARA:"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="#333333"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_marginBottom="8dp"/>
 
     <Button
@@ -42,7 +42,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#E0E0E0"
+        android:background="?android:attr/listDivider"
         android:layout_marginBottom="24dp"/>
 
     <TextView
@@ -51,7 +51,7 @@
         android:text="Si desea buscarlo MANUALMENTE:\nIngrese el número de la serie B:"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="#333333"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_marginBottom="4dp"/>
 
     <EditText
@@ -59,12 +59,14 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:hint="Ejemplo: 77100001"
+        android:textColorHint="#888888"
         android:inputType="number"
         android:maxLength="9"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:background="#EEEEEE"
+        android:background="#FFFFFF"
+        android:textColor="#000000"
         android:layout_marginBottom="4dp"/>
 
     <TextView
@@ -72,7 +74,7 @@
         android:layout_height="wrap_content"
         android:text="(No recibe letras, solo números de 8 o 9 dígitos)"
         android:textSize="12sp"
-        android:textColor="#888888"
+        android:textColor="?android:attr/textColorSecondary"
         android:gravity="center"
         android:layout_marginBottom="16dp"/>
 
@@ -124,7 +126,7 @@
             android:layout_height="wrap_content"
             android:text="Desarrollado por Pepe Rivero"
             android:textStyle="bold"
-            android:textColor="#888888"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp"
             android:layout_marginEnd="12dp"/>
 
