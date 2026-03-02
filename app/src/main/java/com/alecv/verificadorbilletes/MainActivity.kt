@@ -1,88 +1,63 @@
 package com.alecv.verificadorbilletes
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-
-    // Lanzador para recibir los datos del ScannerActivity en Modo Lote
-    private val scannerLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val seriesEscaneadas = result.data?.getStringExtra("SERIES_ESCANEDAS")
-            if (!seriesEscaneadas.isNullOrEmpty()) {
-                val inputSerie = findViewById<EditText>(R.id.inputSerie)
-                val textoActual = inputSerie.text.toString()
-
-                // Si la caja ya tenía texto escrito, añade los nuevos abajo. Si no, los pone directo.
-                if (textoActual.isBlank()) {
-                    inputSerie.setText(seriesEscaneadas)
-                } else {
-                    inputSerie.setText("$textoActual\n$seriesEscaneadas")
-                }
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val btnTiempoReal = findViewById<Button>(R.id.btnTiempoReal)
         val inputSerie = findViewById<EditText>(R.id.inputSerie)
         val btnBuscar = findViewById<Button>(R.id.btnBuscar)
-        val btnCamara = findViewById<Button>(R.id.btnCamara)
-        val btnTiempoReal = findViewById<Button>(R.id.btnTiempoReal)
-
         val btnRangos = findViewById<Button>(R.id.btnRangos)
-        val btnGithub = findViewById<android.widget.ImageButton>(R.id.btnGithub)
+        val btnGithub = findViewById<ImageButton>(R.id.btnGithub)
 
-        // Acción para abrir tu perfil de GitHub
-        btnGithub.setOnClickListener {
-            // ¡OJO! Cambia la URL por el enlace real de tu perfil
-            val url = "https://github.com/AleDevCV"
-            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW)
-            intent.data = android.net.Uri.parse(url)
-            startActivity(intent)
-        }
-
-        // Acción para abrir la pantalla de las tablas del BCB
-        btnRangos.setOnClickListener {
-            val intent = android.content.Intent(this, InfoRangosActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Si aprietan "Abrir Cámara" (Lote)
-        btnCamara.setOnClickListener {
-            val intent = Intent(this, ScannerActivity::class.java)
-            intent.putExtra("MODO", "LOTE")
-            scannerLauncher.launch(intent)
-        }
-
-        // Si aprietan "Verificador en Tiempo Real"
+        // 1. Botón de Cámara (Tiempo Real)
         btnTiempoReal.setOnClickListener {
             val intent = Intent(this, ScannerActivity::class.java)
             intent.putExtra("MODO", "TIEMPO_REAL")
             startActivity(intent)
         }
 
-        // 3. Qué hacer cuando se presiona el botón "Buscar"
+        // 2. Botón de Búsqueda Manual
         btnBuscar.setOnClickListener {
-            val textoIngresado = inputSerie.text.toString()
+            val textoIngresado = inputSerie.text.toString().trim()
 
-            if (textoIngresado.isBlank()) {
-                Toast.makeText(this, "Por favor, ingresa una serie", Toast.LENGTH_SHORT).show()
+            // Validar que no esté vacío y tenga la longitud correcta (8 o 9 dígitos)
+            if (textoIngresado.length < 8 || textoIngresado.length > 9) {
+                Toast.makeText(this, "Por favor, ingresa 8 o 9 dígitos válidos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Abrimos la nueva pantalla y le enviamos el texto
+            // Abrimos la pantalla de resultados y LE AGREGAMOS LA "B" AUTOMÁTICAMENTE
             val intent = Intent(this, ResultadosActivity::class.java)
-            intent.putExtra("SERIES_A_VERIFICAR", textoIngresado)
+            intent.putExtra("SERIES_A_VERIFICAR", "${textoIngresado}B")
+            startActivity(intent)
+
+            // Limpiamos la caja de texto para que esté vacía si el usuario regresa
+            inputSerie.text.clear()
+        }
+
+        // 3. Botón de Rangos Oficiales
+        btnRangos.setOnClickListener {
+            val intent = Intent(this, InfoRangosActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 4. Botón de GitHub
+        btnGithub.setOnClickListener {
+            val url = "https://github.com/AlejandroCV2014"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
             startActivity(intent)
         }
     }
