@@ -37,15 +37,13 @@ class ScannerActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var viewFinder: PreviewView
 
-    // Variables para el modo LOTE
     private val seriesEscaneadas = mutableSetOf<String>()
     private lateinit var txtContador: TextView
     private lateinit var iconoCheck: TextView
     private lateinit var btnTerminar: Button
 
-    // Variables para el modo TIEMPO REAL
     private lateinit var panelResultadoVivo: LinearLayout
-    private lateinit var txtSerieDetectadaEnVivo: TextView // Nueva
+    private lateinit var txtSerieDetectadaEnVivo: TextView 
     private lateinit var txtStatus10Vivo: TextView
     private lateinit var txtLabel10Vivo: TextView
     private lateinit var txtStatus20Vivo: TextView
@@ -53,11 +51,9 @@ class ScannerActivity : AppCompatActivity() {
     private lateinit var txtStatus50Vivo: TextView
     private lateinit var txtLabel50Vivo: TextView
 
-    private var modoEscaneo = "LOTE" // Lote por defecto
+    private var modoEscaneo = "LOTE" 
 
-    // Copiamos los rangos aquí para la validación rápida en Tiempo Real
 
-    // Copiamos los rangos aquí para la validación rápida en Tiempo Real
     private val rangos10 = listOf(
         77100001L..77550000L,
         78000001L..78450000L,
@@ -111,23 +107,22 @@ class ScannerActivity : AppCompatActivity() {
             iniciarCamara()
         } else {
             Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show()
-            finish() // Cierra la pantalla si no hay permiso
+            finish()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // 1. PRIMERO SIEMPRE SE CREA LA VISTA
+        // SE CREA LA VISTA
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scanner)
 
-        // 2. LUEGO SE BUSCAN LOS ELEMENTOS
+        // SE BUSCAN LOS ELEMENTOS
         viewFinder = findViewById(R.id.viewFinder)
         txtContador = findViewById(R.id.txtContador)
         iconoCheck = findViewById(R.id.iconoCheck)
         btnTerminar = findViewById(R.id.btnTerminar)
         panelResultadoVivo = findViewById(R.id.panelResultadoVivo)
 
-        // Elementos nuevos de las 3 columnas
         txtSerieDetectadaEnVivo = findViewById(R.id.txtSerieDetectadaEnVivo)
         txtStatus10Vivo = findViewById(R.id.txtStatus10Vivo)
         txtLabel10Vivo = findViewById(R.id.txtLabel10Vivo)
@@ -231,7 +226,7 @@ class ScannerActivity : AppCompatActivity() {
                     Log.e("ScannerActivity", "Error en OCR", e)
                 }
                 .addOnCompleteListener {
-                    imageProxy.close() // ¡MUY IMPORTANTE! Libera la memoria para el siguiente fotograma
+                    imageProxy.close() //Libera la memoria para el siguiente fotograma
                 }
         } else {
             imageProxy.close()
@@ -305,7 +300,7 @@ class ScannerActivity : AppCompatActivity() {
         iconoCheck.visibility = View.VISIBLE
         iconoCheck.postDelayed({
             iconoCheck.visibility = View.GONE
-        }, 1000) // Se oculta después de 1 segundo (1000 ms)
+        }, 1000) 
     }
 
     private fun vibrarTelefono() {
